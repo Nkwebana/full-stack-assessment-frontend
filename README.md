@@ -1,2 +1,2 @@
 # full-stack-assessment-frontend
-Full stack assessment frontend
+Technical assessment for full stack developer
