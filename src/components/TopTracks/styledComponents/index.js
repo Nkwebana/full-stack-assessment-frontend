@@ -1,7 +1,12 @@
 import styled from 'styled-components';
+import breakpoint from 'styled-components-breakpoint';
+import { theme } from '../../../utils/theme';
 
 const TopTracksContainer = styled.div`
-  margin-left: 20px;
+  ${breakpoint('tablet')`
+    width: 369px;
+    margin-left:10px;
+  `}
 `;
 
 const TopTrackHeader = styled.h4`
@@ -9,15 +14,14 @@ const TopTrackHeader = styled.h4`
   font-weight: normal;
   margin: 0;
   margin-bottom: 10px;
-  color: white;
+  color: ${theme.colors.white};
 `;
 
 const Track = styled.div`
-  width: 250px;
   padding: 10px;
-  background-color: #595959;
   margin-top: 5px;
-  color: white;
+  background-color: ${theme.colors.grey};
+  color: ${theme.colors.white};
   display: flex;
 `;
 
@@ -29,4 +33,15 @@ const TrackTitle = styled.div`
   margin-right: auto;
 `;
 
-export { TopTracksContainer, TopTrackHeader, Track, TrackNumber, TrackTitle };
+const NoTracksFoundMessage = styled.h4`
+  color: ${theme.colors.white};
+`;
+
+export {
+  TopTracksContainer,
+  TopTrackHeader,
+  Track,
+  TrackNumber,
+  TrackTitle,
+  NoTracksFoundMessage,
+};

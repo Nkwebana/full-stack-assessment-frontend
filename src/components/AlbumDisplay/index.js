@@ -1,48 +1,57 @@
 import React from 'react';
-import { CardActionArea, CardContent } from '@material-ui/core';
+import { CardActionArea, CardContent, Typography } from '@material-ui/core';
 import PropTypes from 'prop-types';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
-import { formatNumberOfFans } from '../../utils/helpers';
+import { formatNumberOfFans, truncate } from '../../utils/helpers';
 
 import {
   AlbumCard,
   AlbumCardMedia,
-  AlbumContainer,
-  AlbumTypography,
+  NoAlbumsFoundMessage,
 } from './styledComponents';
 
-function AlbumDisplay({ albums }) {
+function AlbumDisplay({ albums, isAlbumsLoading }) {
   return (
-    <AlbumContainer>
-      {Array.isArray(albums) &&
-        albums.map((album, index) => (
-          <AlbumCard key={index}>
-            <CardActionArea>
-              <AlbumCardMedia image={album.cover_big} />
+    <>
+      {!isAlbumsLoading && (
+        <div>
+          {Array.isArray(albums) && albums.length > 0 ? (
+            albums.map((album, index) => (
+              <AlbumCard key={index}>
+                <CardActionArea>
+                  <AlbumCardMedia image={album.cover_big} />
 
-              <CardContent>
-                <AlbumTypography variant="h6" component="h6">
-                  {album.title}
-                </AlbumTypography>
+                  <CardContent>
+                    <Typography variant="h6" component="h6">
+                      {truncate(album.title, 45)}
+                    </Typography>
 
-                <AlbumTypography>
-                  Fans: {formatNumberOfFans(album.fans)}
-                </AlbumTypography>
+                    <Typography>
+                      Fans: {formatNumberOfFans(album.fans)}
+                    </Typography>
 
-                <AlbumTypography>
-                  Released: {album.release_date}
-                </AlbumTypography>
-              </CardContent>
-            </CardActionArea>
-          </AlbumCard>
-        ))}
-    </AlbumContainer>
+                    <Typography>Released: {album.release_date}</Typography>
+                  </CardContent>
+                </CardActionArea>
+              </AlbumCard>
+            ))
+          ) : (
+            <NoAlbumsFoundMessage>
+              No albums found for this artist.
+            </NoAlbumsFoundMessage>
+          )}
+        </div>
+      )}
+
+      {isAlbumsLoading && <CircularProgress />}
+    </>
   );
 }
 
 AlbumDisplay.propTypes = {
-  handleSelectArtist: PropTypes.func,
-  artistsData: PropTypes.array,
+  albums: PropTypes.array,
+  isAlbumsLoading: PropTypes.bool,
 };
 
 export default AlbumDisplay;

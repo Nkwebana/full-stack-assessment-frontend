@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { InputBase } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import BarChartIcon from '@material-ui/icons/BarChart';
+import { theme } from '../../../utils/theme';
 
 const AppBarBody = styled.div`
   display: flex;
@@ -21,7 +22,7 @@ const AppBarBodyActions = styled.div`
   height: 40px;
   margin-left: 5px;
   margin-right: 10px;
-  background-color: #7281d8;
+  background-color: ${theme.colors.lightPurple};
 `;
 
 const AppBarSearchIcon = styled(SearchIcon)`
@@ -34,7 +35,7 @@ const AppBarSearchInput = styled(InputBase)`
   min-width: 210px;
   height: '100%';
   margin-right: 5px;
-  color: white;
+  color: ${theme.colors.white};
 `;
 
 const AppBarChartIcon = styled(BarChartIcon)`

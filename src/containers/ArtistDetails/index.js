@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { CardContent } from '@material-ui/core';
+import { CardContent, Typography } from '@material-ui/core';
 
 import { FetchData } from '../../providers/FetchData';
 import { formatNumberOfFans } from '../../utils/helpers';
@@ -10,7 +10,6 @@ import AlbumDisplay from '../../components/AlbumDisplay';
 import {
   ArtistDetailCard,
   CardMediaWrapper,
-  CardTypography,
   ArtistDetailWrapper,
   CardBodyWrapper,
 } from './styledComponents';
@@ -19,20 +18,24 @@ function ArtistDetails() {
   const [topTracks, setTopTracks] = useState([]);
   const [albums, setAlbums] = useState([]);
   const [isTracksLoading, setIsTracksLoading] = useState(false);
+  const [isAlbumsLoading, setIsAlbumsLoading] = useState(false);
 
   const location = useLocation();
   const selectedArtist = location && location.state ? location.state : {};
   const { id, name, nb_fan, picture_big } = selectedArtist;
 
   const fetchArtistAlbums = async (artistId) => {
+    setIsAlbumsLoading(true);
+
     const { success, data, error } = await FetchData.getArtistAlbum(artistId);
+
+    setIsAlbumsLoading(false);
 
     if (error) {
       return alert(error);
     }
 
     if (success && data) {
-      console.log(data.data);
       return setAlbums(data.data);
     }
 
@@ -64,7 +67,7 @@ function ArtistDetails() {
       fetchArtistTopTracks(id);
       fetchArtistAlbums(id);
     }
-  }, []);
+  }, [id]);
 
   return (
     <>
@@ -74,13 +77,11 @@ function ArtistDetails() {
             <CardMediaWrapper image={picture_big} />
 
             <CardContent>
-              <CardTypography gutterBottom variant="h5" component="h2">
+              <Typography gutterBottom variant="h5" component="h2">
                 {name}
-              </CardTypography>
+              </Typography>
 
-              <CardTypography>
-                Fans: {formatNumberOfFans(nb_fan)}
-              </CardTypography>
+              <Typography>Fans: {formatNumberOfFans(nb_fan)}</Typography>
             </CardContent>
           </CardBodyWrapper>
         </ArtistDetailCard>
@@ -88,7 +89,7 @@ function ArtistDetails() {
         <TopTracks topTracks={topTracks} isTracksLoading={isTracksLoading} />
       </ArtistDetailWrapper>
 
-      <AlbumDisplay albums={albums} />
+      <AlbumDisplay albums={albums} isAlbumsLoading={isAlbumsLoading} />
     </>
   );
 }

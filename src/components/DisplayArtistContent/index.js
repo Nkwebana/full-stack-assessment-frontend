@@ -1,14 +1,10 @@
 import React from 'react';
-import { CardActionArea, CardContent } from '@material-ui/core';
+import { CardActionArea, CardContent, Typography } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
 import { formatNumberOfFans } from '../../utils/helpers';
 
-import {
-  ArtistContentCard,
-  ArtistContentMedia,
-  ArtistContentTypography,
-} from './styledComponents';
+import { ArtistContentCard, ArtistContentMedia } from './styledComponents';
 
 function DisplayArtistContent({ artistsData, handleSelectArtist }) {
   return (
@@ -23,17 +19,13 @@ function DisplayArtistContent({ artistsData, handleSelectArtist }) {
               <ArtistContentMedia image={artist.picture_big} />
 
               <CardContent>
-                <ArtistContentTypography
-                  gutterBottom
-                  variant="h5"
-                  component="h2"
-                >
+                <Typography gutterBottom variant="h5" component="h2">
                   {artist.name}
-                </ArtistContentTypography>
+                </Typography>
 
-                <ArtistContentTypography>
+                <Typography>
                   Fans: {formatNumberOfFans(artist.nb_fan)}
-                </ArtistContentTypography>
+                </Typography>
               </CardContent>
             </CardActionArea>
           </ArtistContentCard>

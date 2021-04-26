@@ -1,49 +1,40 @@
 import styled from 'styled-components';
 import breakpoint from 'styled-components-breakpoint';
-import { Card, CardMedia, Typography } from '@material-ui/core';
-
-const AlbumContainer = styled.div``;
+import { Card, CardMedia } from '@material-ui/core';
+import { theme } from '../../../utils/theme';
 
 const AlbumCard = styled(Card)`
-  max-width: 600px;
-  margin: 20px;
-
-  background-color: #595959 !important;
+  margin-bottom: 10px;
+  background-color: ${theme.colors.grey};
 
   ${breakpoint('tablet')`
     width: 368px;
     display:inline-block;
-    margin-bottom: 0;
-
+    margin-bottom: 10px;
     :nth-child(even){
-      margin-left: 0;
-      margin-right: 0;
+      margin-left: 10px;
     }
-  `}
+  `};
 
-  ${breakpoint('desktop')`
-    width: 240px;
+  ${breakpoint('laptop')`
+    width: 243.5px;
     height: 310px;
-    margin-left: 0;
-
-    :nth-child(even){
-      margin-right:20px;
-      margin-bottom:0;
+    :nth-child(4n-1){
+      margin-left: 10px;
     }
+  `};
 
-    :nth-child(4n){
-      margin-right:0;
-    }
-
-  `}
+  ${breakpoint('big')`
+    width: 248.5px;
+  `};
 `;
 
 const AlbumCardMedia = styled(CardMedia)`
   height: 140px;
 `;
 
-const AlbumTypography = styled(Typography)`
-  color: #fafafa;
+const NoAlbumsFoundMessage = styled.h4`
+  color: ${theme.colors.white};
 `;
 
-export { AlbumContainer, AlbumCard, AlbumCardMedia, AlbumTypography };
+export { AlbumCard, AlbumCardMedia, NoAlbumsFoundMessage };

@@ -14,7 +14,7 @@ export const theme = {
   },
   colors: {
     lightPurple: '#7281d8',
-    white: '#fff',
+    white: '#ffff',
     darkGrey: '#303030',
     grey: '#424242',
   },

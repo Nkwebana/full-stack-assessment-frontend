@@ -1,36 +1,50 @@
 import styled from 'styled-components';
 import breakpoint from 'styled-components-breakpoint';
-import { Card, CardMedia, Typography } from '@material-ui/core';
+import { Card, CardMedia } from '@material-ui/core';
+import { theme } from '../../../utils/theme';
 
 const ArtistDetailCard = styled(Card)`
-  width: 731px;
-  background-color: #595959;
+  margin-bottom: 10px;
+  background-color: ${theme.colors.grey};
 
-  margin-bottom: 30px;
+  ${breakpoint('tablet')`
+    width:369px;
+    margin-bottom: 0;
+  `};
+
+  ${breakpoint('laptop')`
+    width:100%;
+  `};
 `;
 
 const CardMediaWrapper = styled(CardMedia)`
-  width: 270px;
-`;
+  height: 140px;
 
-const CardTypography = styled(Typography)`
-  color: #fafafa;
+  ${breakpoint('laptop')`
+    width: 270px;
+    height: 100%;
+  `};
 `;
 
 const ArtistDetailWrapper = styled.div`
-  display: flex;
-  height: 270px;
+  margin-bottom: 25px;
+
+  ${breakpoint('tablet')`
+    display: flex;
+    height: 250px;
+  `}
 `;
 
 const CardBodyWrapper = styled.div`
-  display: flex;
-  height: 100%;
+  ${breakpoint('laptop')`
+    display: flex;
+    height: 100%;
+  `}
 `;
 
 export {
   ArtistDetailCard,
   CardMediaWrapper,
-  CardTypography,
   ArtistDetailWrapper,
   CardBodyWrapper,
 };

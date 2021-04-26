@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { fade } from '@material-ui/core/styles';
 import { AppBar } from '@material-ui/core';
 
 import {
@@ -10,8 +9,17 @@ import {
   AppBarBody,
   AppBarChartIcon,
 } from './styledComponents';
+import { debounce } from '../../utils/helpers';
 
 function MenuBar({ handleSearch }) {
+  const handleArtistSearch = debounce(
+    (searchText) =>
+      handleSearch &&
+      typeof handleSearch === 'function' &&
+      handleSearch(searchText),
+    300
+  );
+
   return (
     <AppBar position="sticky">
       <AppBarBody>
@@ -22,7 +30,7 @@ function MenuBar({ handleSearch }) {
 
           <AppBarSearchInput
             placeholder="Search..."
-            onChange={(event) => handleSearch(event.target.value)}
+            onChange={(event) => handleArtistSearch(event.target.value)}
           />
         </AppBarBodyActions>
       </AppBarBody>
