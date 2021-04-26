@@ -1,5 +1,6 @@
-export const SEARCH_ARTISTS_URL = 'http://localhost:8080/search-artist';
+const BASE_URL = 'http://localhost:8080';
+
+export const SEARCH_ARTISTS_URL = BASE_URL + '/search-artist';
 export const FETCH_ARTIST_TOP_TRACKS_URL =
-  'http://localhost:8080/fetch-artist-top_tracks';
-export const FETCH_ARTIST_ALBUMS_URL =
-  'http://localhost:8080/fetch-artist-albums';
+  BASE_URL + '/fetch-artist-top_tracks';
+export const FETCH_ARTIST_ALBUMS_URL = BASE_URL + '/fetch-artist-albums';
